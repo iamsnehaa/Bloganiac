@@ -1,7 +1,6 @@
 "use client";
 import { IconArrowNarrowRight } from "@tabler/icons-react";
 import { useState, useRef, useId, useEffect } from "react";
-import Image from "next/image";
 
 interface SlideData {
   title: string;
@@ -21,40 +20,39 @@ const Slide = ({ slide, index, current, handleSlideClick }: SlideProps) => {
 
   const xRef = useRef(0);
   const yRef = useRef(0);
-  const frameRef = useRef<number | null>(null);
-
+  const frameRef = useRef<number | null>(null) ;
 
   useEffect(() => {
     const animate = () => {
       if (!slideRef.current) return;
-  
-      slideRef.current.style.setProperty("--x", `${xRef.current}px`);
-      slideRef.current.style.setProperty("--y", `${yRef.current}px`);
-  
+
+      const x = xRef.current;
+      const y = yRef.current;
+
+      slideRef.current.style.setProperty("--x", `${x}px`);
+      slideRef.current.style.setProperty("--y", `${y}px`);
+
       frameRef.current = requestAnimationFrame(animate);
     };
-  
-    if (current === index) {
-      frameRef.current = requestAnimationFrame(animate);
-    }
-  
+
+    frameRef.current = requestAnimationFrame(animate);
+
     return () => {
       if (frameRef.current) {
         cancelAnimationFrame(frameRef.current);
       }
     };
-  }, [current, index]); // Dependencies ensure cleanup when slide changes
-  
-  
+  }, []);
 
   const handleMouseMove = (event: React.MouseEvent) => {
-    if (!slideRef.current) return;
-    
-    const r = slideRef.current.getBoundingClientRect();
-    xRef.current = event.clientX - (r.left + r.width / 2);
-    yRef.current = event.clientY - (r.top + r.height / 2);
+    const el = slideRef.current;
+    if (!el) return;
+
+    const r = el.getBoundingClientRect();
+    xRef.current = event.clientX - (r.left + Math.floor(r.width / 2));
+    yRef.current = event.clientY - (r.top + Math.floor(r.height / 2));
   };
-  
+
   const handleMouseLeave = () => {
     xRef.current = 0;
     yRef.current = 0;
@@ -92,7 +90,7 @@ const Slide = ({ slide, index, current, handleSlideClick }: SlideProps) => {
                 : "none",
           }}
         >
-          <Image
+          <img
             className="absolute inset-0 w-[120%] h-[120%] object-cover opacity-100 transition-opacity duration-600 ease-in-out"
             style={{
               opacity: current === index ? 1 : 0.5,
@@ -178,11 +176,11 @@ export function Carousel({ slides }: CarouselProps) {
 
   return (
     <div
-      className="relative w-[70vmin] h-[70vmin] mx-auto "
+      className="relative w-[70vmin] h-[70vmin] mx-auto"
       aria-labelledby={`carousel-heading-${id}`}
     >
       <ul
-        className=" absolute flex mx-[-4vmin] transition-transform duration-1000 ease-in-out"
+        className="absolute flex mx-[-4vmin] transition-transform duration-1000 ease-in-out"
         style={{
           transform: `translateX(-${current * (100 / slides.length)}%)`,
         }}
