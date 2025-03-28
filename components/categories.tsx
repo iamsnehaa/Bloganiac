@@ -18,18 +18,18 @@ const CategoriesDropdown = () => {
     <div className="absolute top-4 left-4 z-20">
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="p-2 rounded-md  hover:bg-gray-300 transition"
+        className="p-2 rounded-md  hover:bg-black transition"
       >
-        {isOpen ? <X size={24} /> : <Menu size={24} />}
+        {isOpen ? <X size={30} /> : <Menu size={30} />}
       </button>
 
       {isOpen && (
-        <div className="absolute mt-2 bg-white border border-gray-300 shadow-md rounded-md w-40">
+        <div className="absolute mt-2 bg-gray-900 border border-gray-300 shadow-md rounded-md w-40">
           <ul className="py-2">
             {categories.map((category, index) => (
               <li
                 key={index}
-                className="px-4 py-2 hover:bg-gray-900 cursor-pointer"
+                className="px-4 py-2 hover:bg-gray-500 cursor-pointer"
               >
                 {category}
               </li>

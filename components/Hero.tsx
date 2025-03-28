@@ -1,34 +1,65 @@
 "use client";
 
 import Image from "next/image";
-import { ColourfulText } from "./colortext";
-import SearchBar from "./Searchbar";
 import { useState } from "react";
+import SearchBar from "./Searchbar";
 import CategoriesDropdown from "./categories";
+import { BentoGrid, BentoGridItem } from "./bento/bento";
+
 export default function Hero() {
   const [SearchQuery, setSearchQuery] = useState("");
 
   return (
-    <div className="absolute inset-0 flex flex-col items-center justify-center z-10 pointer-events-none space-y-4">
+    <div className="relative flex flex-col items-center justify-center min-h-screen  space-y-6">
+
       <div className="absolute top-4 right-4 w-1/4">
         <SearchBar onSearch={setSearchQuery} />
       </div>
-      <div className="relative w-full h-screen flex flex-col items-center justify-center z-10 space-y-4">
-        <CategoriesDropdown />
-      </div>
 
+      <CategoriesDropdown />
+      <div className="w-full flex justify-start ml-auto">
       <Image
-        src="/bloganiac.png"
-        alt="Centered Image"
-        width={500}
-        height={500}
-        priority
-      />
-      <div className="flex flex-wrap justify-center items-center text-center text-4xl ">
-        <h2 className="mr-2">Welcome to all the</h2>
-        <ColourfulText text="Maniacs" />
-        <h2 className="mx-2">who likes to</h2>
-        <ColourfulText text="Blog" />
+    src="/bloganiac.png"
+    alt="Logo"
+    width={700}
+    height={700}
+    priority
+    
+  />
+  
+</div>
+
+      <div className=" absolute top-10 right-6 justify-end ">
+
+        <BentoGrid className="scale-95">
+          <BentoGridItem
+          
+          title="Feeling Snackiss.."
+          description="Share your Snack recipes."
+          imagesrc="/images/cake.jpeg"
+          className="col-span-1 row-span-1"/>
+          <BentoGridItem
+          title="Keeping up with Sharma's"
+          description="Share your lifestyle."
+          imagesrc="/images/moi.jpeg"
+          className="col-span-1 row-span-2"/>
+        
+        <BentoGridItem
+          title="Coffee for life"
+          description="Share your survival stories."
+          imagesrc="/images/coffee.jpeg"
+          className="col-span-1 row-span-3"/>
+          <BentoGridItem
+          title="History beyond life"
+          description="Read about culture and history."
+          imagesrc="/images/arch.jpeg"
+          className="col-span-1 row-span-2"/>
+          <BentoGridItem
+          title="Essence of life"
+          description="Lifeguard you want to rely on."
+          imagesrc="/images/life.jpeg"
+          className="col-span-1 row-span-1"/>
+          </BentoGrid>
       </div>
     </div>
   );
