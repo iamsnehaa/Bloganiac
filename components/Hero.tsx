@@ -26,12 +26,12 @@ export default function Hero() {
     priority
     
   />
-  
+
 </div>
 
       <div className=" absolute top-10 right-6 justify-end ">
 
-        <BentoGrid className="scale-95">
+        <BentoGrid className="scale-90">
           <BentoGridItem
           
           title="Feeling Snackiss.."

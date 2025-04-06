@@ -10,6 +10,7 @@ import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { Home, Star, Info, User, Phone } from "lucide-react";
 
+
 export const FloatingNav = ({ className }: { className?: string }) => {
   const { scrollYProgress } = useScroll();
   const [visible, setVisible] = useState(false);
@@ -22,12 +23,12 @@ export const FloatingNav = ({ className }: { className?: string }) => {
   });
 
   const navItems = [
-    { name: "Home", link: "/home", icon: <Home size={18} /> },
-    { name: "Stars", link: "/stars", icon: <Star size={18} /> },
-    { name: "About", link: "/about", icon: <Info size={18} /> },
-    { name: "Contact Us", link: "/contact", icon: <Phone size={18} /> },
+    { name: "Home", link: "#hero", icon: <Home size={18} /> },
+    { name: "Stars", link: "#stars", icon: <Star size={18} /> },
+    { name: "About", link: "#create", icon: <Info size={18} /> },
+    { name: "Contact Us", link: "#contact", icon: <Phone size={18} /> },
   ];
-
+  
   return (
     <AnimatePresence mode="wait">
       <motion.div
@@ -40,14 +41,15 @@ export const FloatingNav = ({ className }: { className?: string }) => {
         )}
       >
         {navItems.map((navItem, idx) => (
-          <Link
-            key={`link-${idx}`}
-            href={navItem.link}
-            className="relative dark:text-neutral-50 flex items-center space-x-2 text-neutral-600 dark:hover:text-neutral-300 hover:text-neutral-500 px-2 py-1"
-          >
-            {navItem.icon}
-            <span className="hidden sm:block text-sm">{navItem.name}</span>
-          </Link>
+          <a
+          key={`link-${idx}`}
+          href={navItem.link}
+          className="relative dark:text-neutral-50 flex items-center space-x-2 text-neutral-600 dark:hover:text-neutral-300 hover:text-neutral-500 px-2 py-1"
+        >
+          {navItem.icon}
+          <span className="hidden sm:block text-sm">{navItem.name}</span>
+        </a>
+        
         ))}
         <Link
           href="/login"
